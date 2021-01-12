@@ -1,0 +1,52 @@
+<a class="mt-2" mat-raised-button color="accent" routerLink="/admin/book">
+  <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>   Yeni Ekle</a>
+<div class="mat-elevation-z8">
+  <table  style="width:100%;" mat-table [dataSource]="dataSource">
+
+
+    <ng-container matColumnDef="picture">
+      <th mat-header-cell *matHeaderCellDef>Kitap Resmi </th>
+      <td mat-cell *matCellDef="let book">
+
+        <img style="height:50px;width:50px;" [src]="book.picture"/>
+
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Kitap İsmi </th>
+      <td mat-cell *matCellDef="let book"> {{book.title}} </td>
+    </ng-container>
+    <ng-container matColumnDef="author">
+      <th mat-header-cell *matHeaderCellDef>Kitap Yazarı </th>
+      <td mat-cell *matCellDef="let book"> {{book.author}} </td>
+    </ng-container>
+    <ng-container matColumnDef="stock">
+      <th mat-header-cell *matHeaderCellDef>Stok </th>
+      <td mat-cell *matCellDef="let book"> {{book.stock}} </td>
+    </ng-container>
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Kitap Fiyatı </th>
+      <td mat-cell *matCellDef="let book"> {{book.price}} </td>
+    </ng-container>
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef>Kategori </th>
+      <td mat-cell *matCellDef="let book"> {{book.categoryBy.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action </th>
+      <td mat-cell *matCellDef="let book">
+
+      <a mat-raised-button color="primary" [routerLink]="['/admin/book',book._id]"><mat-icon>update </mat-icon>Update</a>
+      <button (click)="delete(book._id)" class="ml-3" mat-raised-button color="warn" > <mat-icon>delete </mat-icon>Delete</button>
+
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
